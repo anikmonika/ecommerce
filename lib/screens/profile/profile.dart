@@ -11,7 +11,7 @@ class Profile extends StatelessWidget {
         children: [
           Image.asset(
             "images/profile3.png",
-            fit: BoxFit.cover,
+            fit: BoxFit.contain,
             height: size.height,
             width: size.width,
           ),
@@ -104,14 +104,14 @@ class Profile extends StatelessWidget {
                             ),
                             const SizedBox(height: 10),
                             const Text(
-                              "Winnie Vasquez",
+                              "MONICA",
                               style: TextStyle(
                                 fontWeight: FontWeight.w800,
                                 fontSize: 28, // Adjust font size
                               ),
                             ),
                             const Text(
-                              "Flutter Developer",
+                              "seller",
                               style: TextStyle(
                                 fontWeight: FontWeight.w800,
                                 fontSize: 16,
