@@ -11,7 +11,7 @@ class Profile extends StatelessWidget {
         children: [
           Image.asset(
             "images/profile3.png",
-            fit: BoxFit.contain,
+            fit: BoxFit.cover,  // Adjusted to BoxFit.cover
             height: size.height,
             width: size.width,
           ),

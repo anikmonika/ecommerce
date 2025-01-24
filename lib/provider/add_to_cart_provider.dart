@@ -6,9 +6,8 @@ import '../models/product_model.dart';
 class CartProvider extends ChangeNotifier {
   final List<Product> _cart = [];
   List<Product> get cart => _cart;
-  void toogleFavorite(Product product) {
-    // toogleFavorite is just a name you can give what ever you wants to
 
+  void toogleFavorite(Product product) {
     if (_cart.contains(product)) {
       for (Product element in _cart) {
         element.quantity++;
@@ -19,13 +18,13 @@ class CartProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-// for increment
+  // Increment quantity
   incrementQtn(int index) {
     _cart[index].quantity++;
     notifyListeners();
   }
 
-  // for decrement
+  // Decrement quantity
   decrementQtn(int index) {
     if (_cart[index].quantity <= 1) {
       return;
@@ -34,13 +33,19 @@ class CartProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // for total amount
+  // Calculate total price
   totalPrice() {
     double myTotal = 0.0; // initial
     for (Product element in _cart) {
       myTotal += element.price * element.quantity;
     }
     return myTotal;
+  }
+
+  // Clear the cart
+  void clearCart() {
+    _cart.clear();
+    notifyListeners();
   }
 
   static CartProvider of(BuildContext context, {bool listen = true}) {

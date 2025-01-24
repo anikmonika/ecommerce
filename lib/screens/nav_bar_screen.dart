@@ -14,13 +14,15 @@ class BottomNavBar extends StatefulWidget {
 
 class _BottomNavBarState extends State<BottomNavBar> {
   int cuttentIndex = 2;
-    List screens = const [
+
+  List screens = const [
     Scaffold(),
     Favorite(),
     HomeScreen(),
     CartScreen(),
     Profile(),
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +30,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
         onPressed: () {
           setState(() {
             cuttentIndex = 2;
-          
           });
         },
         shape: const CircleBorder(),
@@ -42,7 +43,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
         elevation: 1,
-        height: 60,
+        height: 80, // Adjusted height for labels
         color: Colors.white,
         shape: const CircularNotchedRectangle(),
         notchMargin: 10,
@@ -51,61 +52,67 @@ class _BottomNavBarState extends State<BottomNavBar> {
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            IconButton(
-              onPressed: () {
-                setState(() {
-                  cuttentIndex = 0;
-                });
-              },
-              icon: Icon(
-                Icons.grid_view_outlined,
-                size: 30,
-                color: cuttentIndex == 0 ? kprimaryColor : Colors.grey.shade400,
-              ),
+            // Home
+            _buildBottomIcon(
+              icon: Icons.grid_view_outlined,
+              label: "Home",
+              index: 0,
             ),
-            IconButton(
-              onPressed: () {
-                setState(() {
-                  cuttentIndex = 1;
-                });
-              },
-              icon: Icon(
-                Icons.favorite_border,
-                size: 30,
-                color: cuttentIndex == 1 ? kprimaryColor : Colors.grey.shade400,
-              ),
+            // Favorite
+            _buildBottomIcon(
+              icon: Icons.favorite_border,
+              label: "Favorite",
+              index: 1,
             ),
             const SizedBox(
               width: 15,
             ),
-            IconButton(
-              onPressed: () {
-                setState(() {
-                  cuttentIndex = 3;
-                });
-              },
-              icon: Icon(
-                Icons.shopping_cart_outlined,
-                size: 30,
-                color: cuttentIndex == 3 ? kprimaryColor : Colors.grey.shade400,
-              ),
+            // Cart
+            _buildBottomIcon(
+              icon: Icons.shopping_cart_outlined,
+              label: "Cart",
+              index: 3,
             ),
-            IconButton(
-              onPressed: () {
-                setState(() {
-                  cuttentIndex = 4;
-                });
-              },
-              icon: Icon(
-                Icons.person,
-                size: 30,
-                color: cuttentIndex == 4 ? kprimaryColor : Colors.grey.shade400,
-              ),
+            // Profile
+            _buildBottomIcon(
+              icon: Icons.person,
+              label: "Profile",
+              index: 4,
             ),
           ],
         ),
       ),
       body: screens[cuttentIndex],
+    );
+  }
+
+  // Widget for each icon with label
+  Widget _buildBottomIcon({required IconData icon, required String label, required int index}) {
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          cuttentIndex = index;
+        });
+      },
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            icon,
+            size: 30,
+            color: cuttentIndex == index ? kprimaryColor : Colors.grey.shade400,
+          ),
+          const SizedBox(height: 4),
+          Text(
+            label,
+            style: TextStyle(
+              fontSize: 12,
+              color: cuttentIndex == index ? kprimaryColor : Colors.grey.shade400,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
