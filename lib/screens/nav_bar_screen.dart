@@ -13,7 +13,7 @@ class BottomNavBar extends StatefulWidget {
 }
 
 class _BottomNavBarState extends State<BottomNavBar> {
-  int cuttentIndex = 2;
+  int currentIndex = 2;
 
   List screens = const [
     Scaffold(),
@@ -26,10 +26,23 @@ class _BottomNavBarState extends State<BottomNavBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          "MAXIM SHOP",
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+        ),
+        centerTitle: true,
+        backgroundColor: kprimaryColor,
+        elevation: 0,
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           setState(() {
-            cuttentIndex = 2;
+            currentIndex = 2;
           });
         },
         shape: const CircleBorder(),
@@ -52,28 +65,22 @@ class _BottomNavBarState extends State<BottomNavBar> {
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            // Home
             _buildBottomIcon(
               icon: Icons.grid_view_outlined,
               label: "Home",
               index: 0,
             ),
-            // Favorite
             _buildBottomIcon(
               icon: Icons.favorite_border,
               label: "Favorite",
               index: 1,
             ),
-            const SizedBox(
-              width: 15,
-            ),
-            // Cart
+            const SizedBox(width: 15),
             _buildBottomIcon(
               icon: Icons.shopping_cart_outlined,
               label: "Cart",
               index: 3,
             ),
-            // Profile
             _buildBottomIcon(
               icon: Icons.person,
               label: "Profile",
@@ -82,16 +89,15 @@ class _BottomNavBarState extends State<BottomNavBar> {
           ],
         ),
       ),
-      body: screens[cuttentIndex],
+      body: screens[currentIndex],
     );
   }
 
-  // Widget for each icon with label
   Widget _buildBottomIcon({required IconData icon, required String label, required int index}) {
     return GestureDetector(
       onTap: () {
         setState(() {
-          cuttentIndex = index;
+          currentIndex = index;
         });
       },
       child: Column(
@@ -101,14 +107,14 @@ class _BottomNavBarState extends State<BottomNavBar> {
           Icon(
             icon,
             size: 30,
-            color: cuttentIndex == index ? kprimaryColor : Colors.grey.shade400,
+            color: currentIndex == index ? kprimaryColor : Colors.grey.shade400,
           ),
           const SizedBox(height: 4),
           Text(
             label,
             style: TextStyle(
               fontSize: 12,
-              color: cuttentIndex == index ? kprimaryColor : Colors.grey.shade400,
+              color: currentIndex == index ? kprimaryColor : Colors.grey.shade400,
             ),
           ),
         ],

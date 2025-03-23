@@ -12,8 +12,6 @@ class ImageSlider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size; // Mendapatkan dimensi layar
-
     return Column(
       mainAxisSize: MainAxisSize.min, // Memastikan slider tidak memakan ruang ekstra
       children: [
